@@ -1,0 +1,19 @@
+- name: RHEL 6 install dependencies
+  yum: >
+    name={{ item }}
+    state=present
+    update_cache=yes
+  with_items:
+    - unzip
+    - "https://dl.fedoraproject.org/pub/epel/6/x86_64/jq-1.3-2.el6.x86_64.rpm"
+  when: ansible_os_family in ['CentOS', 'Fedora', 'OpenSuse', 'RedHat'] and ansible_lsb.major_release|int == 6
+
+- name: RHEL 7 install dependencies
+  yum: >
+    name={{ item }}
+    state=present
+    update_cache=yes
+  with_items:
+    - unzip
+    - "https://dl.fedoraproject.org/pub/epel/7/x86_64/jq-1.3-2.el7.x86_64.rpm"
+  when: ansible_os_family in ['CentOS', 'Fedora', 'OpenSuse', 'RedHat'] and ansible_lsb.major_release|int == 7
