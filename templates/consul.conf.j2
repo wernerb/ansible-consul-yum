@@ -7,7 +7,7 @@ stop on runlevel [016]
 script
 
 # Make sure to use all our CPUs, because Consul can block a scheduler thread
-export GOMAXPROCS=`nproc`
+export GOMAXPROCS="$(echo -e "2\n$(nproc)" | sort -g | tail -n1)"
 
 {% if consul_dynamic_bind %}
 # Get the public IP

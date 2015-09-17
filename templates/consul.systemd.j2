@@ -6,7 +6,7 @@ Description=Consul Agent
 # Get the public IP and set BIND Environment Var
 Environment="BIND=`ifconfig eth0 | grep "inet addr" | awk '{ print substr($2,6) }'`"
 {% endif %}
-Environment="GOMAXPROCS=`nproc`"
+Environment="GOMAXPROCS=$(echo -e "2\n$(nproc)" | sort -g | tail -n1)"
 User={{ consul_user }}
 Group={{ consul_group }}
 ExecStart={{ consul_home }}/bin/consul agent {% if consul_dynamic_bind %} -bind=$BIND {% endif %} -config-dir {{ consul_config_dir }} -config-file={{ consul_config_file }} >> {{ consul_log_file }} 2>&1

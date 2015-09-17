@@ -98,6 +98,17 @@
     - reload systemd
     - restart consul
 
+- name: copy consul init script
+  template: >
+    src=consul.init.j2
+    dest=/etc/init.d/consul
+    owner=root
+    group=root
+    mode=0755
+  when: consul_use_init
+  notify:
+    - restart consul
+
 - name: add consul to path through profile.d
   template: >
     src=consul.sh.j2

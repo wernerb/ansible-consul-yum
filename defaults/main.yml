@@ -17,6 +17,7 @@ consul_home: /opt/consul
 consul_config_dir: /etc/consul.d
 consul_config_file: /etc/consul.conf
 consul_log_file: /var/log/consul
+consul_bootstrap: no
 consul_data_dir: "{{ consul_home }}/data"
 consul_upstart_template: "consul.conf.j2"
 
@@ -26,6 +27,7 @@ consul_user: consul
 consul_group: consul
 consul_use_systemd: false
 consul_use_upstart: true
+consul_use_init: false
 
 consul_is_server: false
 
